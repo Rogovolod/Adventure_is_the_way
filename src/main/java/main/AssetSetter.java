@@ -5,52 +5,78 @@ import object.Chest;
 import object.Door;
 import object.Key;
 import object.Rock;
+import object.Wall;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
 
 public class AssetSetter {
 
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
+
+    private BufferedImage wallUpLeftCorner;
+    private BufferedImage wallUp;
+    private BufferedImage wallUpRightCorner;
+    private BufferedImage wallLeft;
+    private BufferedImage wallRight;
+    private BufferedImage wallDownLeftCorner;
+    private BufferedImage wallDown;
+    private BufferedImage wallDownRightCorner;
 
     public AssetSetter(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+        initImages();
+    }
+
+    private void initImages() {
+        try {
+            wallUpLeftCorner = ImageIO.read(Objects.requireNonNull(getClass().getResource("/tiles/wall/wallUpLeftCorner.png")));
+            wallUp = ImageIO.read(Objects.requireNonNull(getClass().getResource("/tiles/wall/wallUp.png")));
+            wallUpRightCorner = ImageIO.read(Objects.requireNonNull(getClass().getResource("/tiles/wall/wallUpRightCorner.png")));
+            wallLeft = ImageIO.read(Objects.requireNonNull(getClass().getResource("/tiles/wall/wallLeft.png")));
+            wallRight = ImageIO.read(Objects.requireNonNull(getClass().getResource("/tiles/wall/wallRight.png")));
+            wallDownLeftCorner = ImageIO.read(Objects.requireNonNull(getClass().getResource("/tiles/wall/wallDownLeftCorner.png")));
+            wallDown = ImageIO.read(Objects.requireNonNull(getClass().getResource("/tiles/wall/wallDown.png")));
+            wallDownRightCorner = ImageIO.read(Objects.requireNonNull(getClass().getResource("/tiles/wall/wallDownRightCorner.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setObject() {
-        gamePanel.objects[0] = new Key();
-        gamePanel.objects[0].setWorldX(23 * gamePanel.titleSize);
-        gamePanel.objects[0].setWorldY(7 * gamePanel.titleSize);
+        gamePanel.objects.add(new Key(23 * gamePanel.titleSize, 7 * gamePanel.titleSize));
+        gamePanel.objects.add(new Key(23 * gamePanel.titleSize, 40 * gamePanel.titleSize));
+        gamePanel.objects.add(new Key(38 * gamePanel.titleSize, 9 * gamePanel.titleSize));
 
-        gamePanel.objects[1] = new Key();
-        gamePanel.objects[1].setWorldX(23 * gamePanel.titleSize);
-        gamePanel.objects[1].setWorldY(40 * gamePanel.titleSize);
+        gamePanel.objects.add(new Door(10 * gamePanel.titleSize, 12 * gamePanel.titleSize));
+        gamePanel.objects.add(new Door(8 * gamePanel.titleSize, 28 * gamePanel.titleSize));
+        gamePanel.objects.add(new Door(12 * gamePanel.titleSize, 23 * gamePanel.titleSize));
 
-        gamePanel.objects[2] = new Key();
-        gamePanel.objects[2].setWorldX(38 * gamePanel.titleSize);
-        gamePanel.objects[2].setWorldY(9 * gamePanel.titleSize);
+        gamePanel.objects.add(new Chest(10 * gamePanel.titleSize, 8 * gamePanel.titleSize));
 
-        gamePanel.objects[3] = new Door();
-        gamePanel.objects[3].setWorldX(10 * gamePanel.titleSize);
-        gamePanel.objects[3].setWorldY(12 * gamePanel.titleSize);
+        gamePanel.objects.add(new Boots(37 * gamePanel.titleSize, 42 * gamePanel.titleSize));
 
-        gamePanel.objects[4] = new Door();
-        gamePanel.objects[4].setWorldX(8 * gamePanel.titleSize);
-        gamePanel.objects[4].setWorldY(28 * gamePanel.titleSize);
+        gamePanel.objects.add(new Rock(25 * gamePanel.titleSize, 19 * gamePanel.titleSize));
 
-        gamePanel.objects[5] = new Door();
-        gamePanel.objects[5].setWorldX(12 * gamePanel.titleSize);
-        gamePanel.objects[5].setWorldY(23 * gamePanel.titleSize);
-
-        gamePanel.objects[6] = new Chest();
-        gamePanel.objects[6].setWorldX(10 * gamePanel.titleSize);
-        gamePanel.objects[6].setWorldY(8 * gamePanel.titleSize);
-
-        gamePanel.objects[7] = new Boots();
-        gamePanel.objects[7].setWorldX(37 * gamePanel.titleSize);
-        gamePanel.objects[7].setWorldY(42 * gamePanel.titleSize);
-
-        gamePanel.objects[8] = new Rock();
-        gamePanel.objects[8].setWorldX(25 * gamePanel.titleSize);
-        gamePanel.objects[8].setWorldY(19 * gamePanel.titleSize);
-
+        gamePanel.objects.add(new Wall(wallUpLeftCorner, 8 * gamePanel.titleSize, 7 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallUp, 9 * gamePanel.titleSize, 7 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallUp, 10 * gamePanel.titleSize, 7 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallUp, 11 * gamePanel.titleSize, 7 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallUpRightCorner, 12 * gamePanel.titleSize, 7 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallLeft, 8 * gamePanel.titleSize, 8 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallRight, 12 * gamePanel.titleSize, 8 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallLeft, 8 * gamePanel.titleSize, 9 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallRight, 12 * gamePanel.titleSize, 9 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallLeft, 8 * gamePanel.titleSize, 10 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallRight, 12 * gamePanel.titleSize, 10 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallLeft, 8 * gamePanel.titleSize, 11 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallRight, 12 * gamePanel.titleSize, 11 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallDownLeftCorner, 8 * gamePanel.titleSize, 12 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallDown, 9 * gamePanel.titleSize, 12 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallDown, 11 * gamePanel.titleSize, 12 * gamePanel.titleSize));
+        gamePanel.objects.add(new Wall(wallDownRightCorner, 12 * gamePanel.titleSize, 12 * gamePanel.titleSize));
     }
 
 }

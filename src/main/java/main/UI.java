@@ -20,7 +20,7 @@ public class UI {
     public boolean gameFinished;
 
     private double playTime;
-    private DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+    private final DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 
     public UI(GamePanel gamePanel) {
         this.gamePanel = gamePanel;

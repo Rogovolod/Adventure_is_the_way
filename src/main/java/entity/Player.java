@@ -14,7 +14,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
-    public int keys = 0;
+    public int keys = 10;
     private int standCounter;
     private boolean moving;
     private int pixelCounter;
@@ -109,46 +109,45 @@ public class Player extends Entity {
 
     public void pickUpObject(int index) {
         if (index != 999) {
-
-            String objName = gamePanel.objects[index].getName();
+            String objName = gamePanel.objects.get(index).getName();
             switch (objName) {
                 case "Key" -> {
                     gamePanel.playSE(1);
                     keys++;
-                    gamePanel.objects[index] = null;
+                    gamePanel.objects.remove(index);
                     gamePanel.ui.showMessage("You got a key!");
                 }
                 case "Door" -> {
                     if (keys > 0) {
                         try {
-                            if (gamePanel.objects[index].isCollision()) {
+                            if (gamePanel.objects.get(index).isCollision()) {
                                 gamePanel.ui.showMessage("You opened the door!");
                                 gamePanel.playSE(3);
-                                gamePanel.objects[index].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResource("/items/door3.png"))));
-                                gamePanel.objects[index].setCollision(false);
+                                gamePanel.objects.get(index).setImage(ImageIO.read(Objects.requireNonNull(getClass().getResource("/items/door3.png"))));
+                                gamePanel.objects.get(index).setCollision(false);
                                 keys--;
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
                             gamePanel.ui.showMessage("You opened the door!");
                             gamePanel.playSE(3);
-                            gamePanel.objects[index] = null;
+                            gamePanel.objects.remove(index);
                             keys--;
                         }
-                    } else if (gamePanel.objects[index].isCollision()) {
+                    } else if (gamePanel.objects.get(index).isCollision()) {
                         gamePanel.ui.showMessage("You need a key!");
                     }
                 }
                 case "Boots" -> {
                     gamePanel.playSE(2);
                     speed += 2;
-                    gamePanel.objects[index] = null;
+                    gamePanel.objects.remove(index);
                     gamePanel.ui.showMessage("Speed up!");
                 }
                 case "Chest" -> {
                     gamePanel.stopMusic();
                     try {
-                        gamePanel.objects[index].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResource("/items/chest2.png"))));
+                        gamePanel.objects.get(index).setImage(ImageIO.read(Objects.requireNonNull(getClass().getResource("/items/chest2.png"))));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

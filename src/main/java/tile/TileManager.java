@@ -94,7 +94,6 @@ public class TileManager {
 
     public void setupImage(int index, String imageName, boolean collision) {
         try {
-            System.out.println(index);
             tile[index] = new Tile();
             tile[index].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResource("/tiles/" + imageName + ".png"))));
             tile[index].setCollision(collision);

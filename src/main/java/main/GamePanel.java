@@ -9,13 +9,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
 
     //Screen settings
     private final int ORIGINAL_TITLE_SIZE = 48; // 48x48 title
 
-    public int titleSize =ORIGINAL_TITLE_SIZE; // 48 * 48
+    public int titleSize = ORIGINAL_TITLE_SIZE; // 48 * 48
     public int maxScreenColumns = 16;
     public int maxScreenRows = 12;
     public int screenWidth = titleSize * maxScreenColumns; // 768 pixels
@@ -40,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     //ENTITY
     public final Player player = new Player(this, keyHandler);
-    public SuperObject[] objects = new SuperObject[10];
+    public ArrayList<SuperObject> objects = new ArrayList<>();
 
 
     // Frame per second
@@ -96,8 +97,8 @@ public class GamePanel extends JPanel implements Runnable {
         titleSize += zoom;
         int newWorldWide = titleSize * MAX_WORLD_COLUMNS; // 2350
         double multiple = (double) newWorldWide / oldWorldWide;
-        player.worldX = (int)(player.worldX * multiple);
-        player.worldY = (int)(player.worldY * multiple);
+        player.worldX = (int) (player.worldX * multiple);
+        player.worldY = (int) (player.worldY * multiple);
         player.speed = newWorldWide / 600;
 
     }
@@ -115,9 +116,9 @@ public class GamePanel extends JPanel implements Runnable {
         tileManager.draw(g2); // Tile
 
         //OBJECTS
-        for (int i = 0; i < objects.length; i++) {
-            if (objects[i] != null) {
-                objects[i].draw(g2, this);
+        for (SuperObject object : objects) {
+            if (object != null) {
+                object.draw(g2, this);
             }
         }
 
