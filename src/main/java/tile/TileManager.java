@@ -5,12 +5,9 @@ import main.GamePanel;
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.Objects;
 
 public class TileManager {
@@ -45,64 +42,59 @@ public class TileManager {
     }
 
     private void getTileImage() {
-/*            setupImage(0, "grass1");
-            setupImage(1, "wall", true);
-            setupImage(2, "water", true);
-            setupImage(3, "earth1");
-            setupImage(4, "treeC", true);
-            setupImage(5, "sand1");*/
-        setupImage(0, "grass0");
-        setupImage(1, "grass0");
-        setupImage(2, "grass0");
-        setupImage(3, "grass0");
-        setupImage(4, "grass0");
-        setupImage(5, "grass0");
-        setupImage(6, "grass0");
-        setupImage(7, "grass0");
-        setupImage(8, "grass0");
-        setupImage(9, "grass0");
+        setupImage(0, "grass/grass0");
+        setupImage(1, "grass/grass0");
+        setupImage(2, "grass/grass0");
+        setupImage(3, "grass/grass0");
+        setupImage(4, "grass/grass0");
+        setupImage(5, "grass/grass0");
+        setupImage(6, "grass/grass0");
+        setupImage(7, "grass/grass0");
+        setupImage(8, "grass/grass0");
+        setupImage(9, "grass/grass0");
 
-        setupImage(10 , "grass2", false);
-        setupImage(11 , "grass1", false);
-        setupImage(12 , "waternew7", true);
-        setupImage(13 , "waternew14", true);
-        setupImage(14 , "waternew1", true);
-        setupImage(15 , "waternew2", true);
-        setupImage(16 , "waternew3", true);
-        setupImage(17 , "waternew6", true);
-        setupImage(18 , "waternew8", true);
-        setupImage(19 , "waternew11", true);
-        setupImage(20 , "waternew12", true);
-        setupImage(21 , "waternew13", true);
-        setupImage(22 , "waternew4", true);
-        setupImage(23 , "waternew5", true);
-        setupImage(24 , "waternew9", true);
-        setupImage(25 , "waternew10", false);
-        setupImage(26 , "sendnew7", false);
-        setupImage(27 , "sendnew1", false);
-        setupImage(28 , "sendnew2", false);
-        setupImage(29 , "sendnew3", false);
-        setupImage(30 , "sendnew6", false);
-        setupImage(31 , "sendnew8", false);
-        setupImage(32 , "sendnew11", false);
-        setupImage(33 , "sendnew12", false);
-        setupImage(34 , "sendnew13", false);
-        setupImage(35 , "sendnew4", false);
-        setupImage(36 , "sendnew5", false);
-        setupImage(37 , "sendnew9", false);
-        setupImage(38 , "sendnew10", false);
+        setupImage(10 , "grass/grass2", false);
+        setupImage(11 , "grass/grass1", false);
+        setupImage(42 , "grass/grass3", false);
+        setupImage(12 , "water/waternew7", true);
+        setupImage(13 , "water/waternew14", true);
+        setupImage(14 , "water/waternew1", true);
+        setupImage(15 , "water/waternew2", true);
+        setupImage(16 , "water/waternew3", true);
+        setupImage(17 , "water/waternew6", true);
+        setupImage(18 , "water/waternew8", true);
+        setupImage(19 , "water/waternew11", true);
+        setupImage(20 , "water/waternew12", true);
+        setupImage(21 , "water/waternew13", true);
+        setupImage(22 , "water/waternew4", true);
+        setupImage(23 , "water/waternew5", true);
+        setupImage(24 , "water/waternew9", true);
+        setupImage(25 , "water/waternew10", false);
+        setupImage(26 , "trail/sandnew7", false);
+        setupImage(27 , "trail/sandnew1", false);
+        setupImage(28 , "trail/sandnew2", false);
+        setupImage(29 , "trail/sandnew3", false);
+        setupImage(30 , "trail/sandnew6", false);
+        setupImage(31 , "trail/sandnew8", false);
+        setupImage(32 , "trail/sandnew11", false);
+        setupImage(33 , "trail/sandnew12", false);
+        setupImage(34 , "trail/sandnew13", false);
+        setupImage(35 , "trail/sandnew4", false);
+        setupImage(36 , "trail/sandnew5", false);
+        setupImage(37 , "trail/sandnew9", false);
+        setupImage(38 , "trail/sandnew10", false);
         setupImage(39 , "earth1", false);
-        setupImage(40 , "wall", true);
-        setupImage(41 , "treeN1", true);
-        setupImage(42 , "grass3", false);
-        setupImage(43 , "treeN2", true);
-        setupImage(44 , "rock5", true);
+        setupImage(40 , "wall/wall", true);
+        setupImage(41 , "trees/treeN1", true);
+        setupImage(43 , "trees/treeN2", true);
+        setupImage(44 , "rocks/rock5", true);
 
 
     }
 
     public void setupImage(int index, String imageName, boolean collision) {
         try {
+            System.out.println(index);
             tile[index] = new Tile();
             tile[index].setImage(ImageIO.read(Objects.requireNonNull(getClass().getResource("/tiles/" + imageName + ".png"))));
             tile[index].setCollision(collision);
