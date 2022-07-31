@@ -1,9 +1,6 @@
 package main;
 
-import object.Boots;
-import object.Chest;
-import object.Door;
-import object.Key;
+import entity.NPC_Pig;
 import object.Rock;
 import object.Wall;
 
@@ -46,18 +43,6 @@ public class AssetSetter {
     }
 
     public void setObject() {
-        gamePanel.objects.add(new Key(23 * gamePanel.titleSize, 7 * gamePanel.titleSize));
-        gamePanel.objects.add(new Key(23 * gamePanel.titleSize, 40 * gamePanel.titleSize));
-        gamePanel.objects.add(new Key(38 * gamePanel.titleSize, 9 * gamePanel.titleSize));
-
-        gamePanel.objects.add(new Door(10 * gamePanel.titleSize, 12 * gamePanel.titleSize));
-        gamePanel.objects.add(new Door(8 * gamePanel.titleSize, 28 * gamePanel.titleSize));
-        gamePanel.objects.add(new Door(12 * gamePanel.titleSize, 23 * gamePanel.titleSize));
-
-        gamePanel.objects.add(new Chest(10 * gamePanel.titleSize, 8 * gamePanel.titleSize));
-
-        gamePanel.objects.add(new Boots(37 * gamePanel.titleSize, 42 * gamePanel.titleSize));
-
         gamePanel.objects.add(new Rock(25 * gamePanel.titleSize, 19 * gamePanel.titleSize));
 
         gamePanel.objects.add(new Wall(wallUpLeftCorner, 8 * gamePanel.titleSize, 7 * gamePanel.titleSize));
@@ -77,6 +62,10 @@ public class AssetSetter {
         gamePanel.objects.add(new Wall(wallDown, 9 * gamePanel.titleSize, 12 * gamePanel.titleSize));
         gamePanel.objects.add(new Wall(wallDown, 11 * gamePanel.titleSize, 12 * gamePanel.titleSize));
         gamePanel.objects.add(new Wall(wallDownRightCorner, 12 * gamePanel.titleSize, 12 * gamePanel.titleSize));
+    }
+
+    public void setNPC() {
+        gamePanel.nPCs.add(new NPC_Pig(gamePanel, gamePanel.titleSize * 21, gamePanel.titleSize * 21));
     }
 
 }

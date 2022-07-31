@@ -1,5 +1,6 @@
 package main;
 
+import entity.Entity;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
@@ -10,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -34,18 +36,20 @@ public class GamePanel extends JPanel implements Runnable {
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
     public final UI ui = new UI(this);
-    private Sound music = new Sound();
-    private Sound se = new Sound();
+    private final Sound music = new Sound();
+    private final Sound se = new Sound();
     public Thread gameThread;
-
 
     //ENTITY
     public final Player player = new Player(this, keyHandler);
-    public ArrayList<SuperObject> objects = new ArrayList<>();
-
+    public CopyOnWriteArrayList<SuperObject> objects = new CopyOnWriteArrayList<>();
+    public ArrayList<Entity> nPCs = new ArrayList<>();
 
     // Frame per second
     private final int FPS = 60;
+
+    //GAME STATE
+    public boolean isPause;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -57,6 +61,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setUpGame() {
         assetSetter.setObject();
+        assetSetter.setNPC();
         playMusic(0);
     }
 
@@ -104,7 +109,16 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        player.update();
+        if (!isPause) {
+            player.update();
+            for (Entity entity : nPCs) {
+                if (entity != null) {
+                    entity.update();
+                }
+            }
+        }
+        if (isPause) {
+        }
     }
 
     public void paintComponent(Graphics g) {
@@ -119,6 +133,12 @@ public class GamePanel extends JPanel implements Runnable {
         for (SuperObject object : objects) {
             if (object != null) {
                 object.draw(g2, this);
+            }
+        }
+        //NPC
+        for(Entity npc : nPCs) {
+            if (npc != null) {
+                npc.draw(g2);
             }
         }
 

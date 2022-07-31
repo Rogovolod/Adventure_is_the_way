@@ -35,6 +35,9 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_D) {
             rightPressed = true;
         }
+        if (code == KeyEvent.VK_P) {
+            gamePanel.isPause = !gamePanel.isPause;
+        }
 /*        if (code == KeyEvent.VK_UP) {
             gamePanel.zoomInOut(1);
         }
@@ -44,11 +47,7 @@ public class KeyHandler implements KeyListener {
 
         //Debug
         if (code == KeyEvent.VK_T) {
-            if(!checkDrawTime) {
-                checkDrawTime = true;
-            } else if(checkDrawTime) {
-                checkDrawTime = false;
-            }
+            checkDrawTime = !checkDrawTime;
         }
 
     }
