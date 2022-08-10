@@ -1,5 +1,6 @@
 package main;
 
+import entity.NPC_Magician;
 import entity.NPC_Pig;
 import object.Rock;
 import object.Wall;
@@ -65,7 +66,8 @@ public class AssetSetter {
     }
 
     public void setNPC() {
-        gamePanel.nPCs.add(new NPC_Pig(gamePanel, gamePanel.titleSize * 21, gamePanel.titleSize * 21));
+//        gamePanel.nPCs.add(new NPC_Pig(gamePanel, gamePanel.titleSize * 21, gamePanel.titleSize * 21));
+        gamePanel.nPCs.add(new NPC_Magician(gamePanel, gamePanel.titleSize * 21, gamePanel.titleSize * 21));
     }
 
 }

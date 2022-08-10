@@ -4,7 +4,6 @@ import main.GamePanel;
 import main.KeyHandler;
 
 import javax.imageio.ImageIO;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -75,7 +74,7 @@ public class Player extends Entity {
             pickUpObject(objIndex);
             // NPC collision
             int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.nPCs);
-            ineractNPC(npcIndex);
+            interactNPC(npcIndex);
             directionAndCollision();
         } else {
             standCounter++;
@@ -86,7 +85,7 @@ public class Player extends Entity {
         }
     }
 
-    private void ineractNPC(int index) {
+    private void interactNPC(int index) {
         if (index != 999) {
 
         }
@@ -122,8 +121,8 @@ public class Player extends Entity {
         g2.drawImage(image, x, y, null);
 
         //Print collision
-        g2.setColor(Color.red);
-        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+/*        g2.setColor(Color.red);
+        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);*/
 
 
     }

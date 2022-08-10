@@ -50,7 +50,6 @@ public class NPC_Pig extends Entity {
             }
             actionLockCounter = 0;
         }
-
     }
 
 }
