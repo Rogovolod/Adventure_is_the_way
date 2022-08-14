@@ -7,7 +7,7 @@
 /dataSources/
 /dataSources.local.xml
 ### IntelliJ IDEA ###
-.idea
+.idea/
 target
 *.iws
 *.iml
@@ -15,4 +15,4 @@ target
 *.zip
 *.xml
 *.bat
-**/out/**
+out/
