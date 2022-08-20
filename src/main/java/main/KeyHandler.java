@@ -23,27 +23,33 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
-        if (code == KeyEvent.VK_W) {
-            upPressed = true;
+
+        if (gamePanel.isPlayed && !gamePanel.isPause && !gamePanel.isDialog) {
+            if (code == KeyEvent.VK_W) {
+                upPressed = true;
+            }
+            if (code == KeyEvent.VK_S) {
+                downPressed = true;
+            }
+            if (code == KeyEvent.VK_A) {
+                leftPressed = true;
+            }
+            if (code == KeyEvent.VK_D) {
+                rightPressed = true;
+            }
+            if (code == KeyEvent.VK_P) {
+                gamePanel.isPause = true;
+            }
+        } else if (gamePanel.isPause) {
+            if (code == KeyEvent.VK_P) {
+                gamePanel.isPause = false;
+            }
+        } else if (gamePanel.isDialog) {
+            if (code == KeyEvent.VK_ENTER) {
+                gamePanel.isDialog = false;
+            }
         }
-        if (code == KeyEvent.VK_S) {
-            downPressed = true;
-        }
-        if (code == KeyEvent.VK_A) {
-            leftPressed = true;
-        }
-        if (code == KeyEvent.VK_D) {
-            rightPressed = true;
-        }
-        if (code == KeyEvent.VK_P) {
-            gamePanel.isPause = !gamePanel.isPause;
-        }
-/*        if (code == KeyEvent.VK_UP) {
-            gamePanel.zoomInOut(1);
-        }
-        if (code == KeyEvent.VK_DOWN) {
-            gamePanel.zoomInOut(-1);
-        }*/
+
 
         //Debug
         if (code == KeyEvent.VK_T) {

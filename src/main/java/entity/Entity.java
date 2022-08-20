@@ -5,6 +5,7 @@ import main.GamePanel;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Entity {
 
@@ -19,6 +20,8 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn;
     public int actionLockCounter;
+    public CopyOnWriteArrayList<String> dialogues = new CopyOnWriteArrayList<>();
+    int dialogIndex;
 
     public Entity(GamePanel gamePanel, int worldX, int worldY) {
         this.gamePanel = gamePanel;
@@ -30,7 +33,8 @@ public class Entity {
         this.gamePanel = gamePanel;
     }
 
-    public void setAction() {}
+    void setAction() {}
+    void speak(){}
 
     public void update() {
         setAction();

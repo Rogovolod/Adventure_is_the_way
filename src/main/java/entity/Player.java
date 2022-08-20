@@ -87,7 +87,8 @@ public class Player extends Entity {
 
     private void interactNPC(int index) {
         if (index != 999) {
-
+            gamePanel.isDialog = true;
+            gamePanel.nPCs.get(index).speak();
         }
     }
 

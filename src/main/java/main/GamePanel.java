@@ -50,6 +50,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     //GAME STATE
     public boolean isPause;
+    public boolean isDialog;
+    public boolean isPlayed = true;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -118,6 +120,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
         if (isPause) {
+
         }
     }
 

@@ -15,21 +15,22 @@ public class NPC_Magician extends Entity {
     public NPC_Magician(GamePanel gamePanel, int x, int y) {
         super(gamePanel, x, y);
         direction = "down";
-        speed = 2;
+        speed = 1;
         getMagicianImage();
+        setDialog();
     }
 
     public void getMagicianImage() {
         try {
-            up1    = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianback1.png")));
-            up2    = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianback2.png")));
-            up3    = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianback3.png")));
-            down1  = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magician1.png")));
-            down2  = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magician3.png")));
-            down3  = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magician2.png")));
-            left1  = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianleft1.png")));
-            left2  = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianleft2.png")));
-            left3  = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianleft3.png")));
+            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianback1.png")));
+            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianback2.png")));
+            up3 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianback3.png")));
+            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magician1.png")));
+            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magician2.png")));
+            down3 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magician3.png")));
+            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianleft1.png")));
+            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianleft2.png")));
+            left3 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianleft3.png")));
             right1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianright1.png")));
             right2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianright2.png")));
             right3 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/NPC/magician/magicianright3.png")));
@@ -38,10 +39,17 @@ public class NPC_Magician extends Entity {
         }
     }
 
+    private void setDialog() {
+        dialogues.add("Greeting, mortal.");
+        dialogues.add("Are you have come to my island to find the treasure?");
+        dialogues.add("I used to be a great wizard but now... I am a powerful lich. So, I'm too old for adventure.");
+        dialogues.add("Good luck, mortal. Try to not die.");
+    }
+
     public void setAction() {
         Random random = new Random();
         actionLockCounter++;
-        if (actionLockCounter == 120) {
+        if (actionLockCounter == 100) {
             int i = random.nextInt(100) + 1;
             if (i <= 25) {
                 direction = "up";
@@ -75,7 +83,7 @@ public class NPC_Magician extends Entity {
                 else if (spriteNumber == 3) spriteNumber = 2;
                 spriteCounter = 0;
             }
-        } else if(collisionOn){
+        } else if (collisionOn) {
             standCounter++;
             if (standCounter == 20) {
                 spriteNumber = 1;
@@ -109,6 +117,20 @@ public class NPC_Magician extends Entity {
             }
         }
         return down1;
+    }
+
+    void speak() {
+        if (dialogIndex >= dialogues.size()) {
+            dialogIndex = 0;
+        }
+        gamePanel.ui.currentDialog = dialogues.get(dialogIndex);
+        dialogIndex++;
+        switch (gamePanel.player.direction) {
+            case "up" -> direction = "down";
+            case "down" -> direction = "up";
+            case "left" -> direction = "right";
+            case "right" -> direction = "left";
+        }
     }
 
 }
