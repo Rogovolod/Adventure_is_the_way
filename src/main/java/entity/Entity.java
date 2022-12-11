@@ -12,6 +12,7 @@ public class Entity {
     public final GamePanel gamePanel;
     public int worldX, worldY;
     public int speed;
+    private int standCounter;
     protected BufferedImage up1, up2, up3, down1, down2, down3, left1, left2, left3, right1, right2, right3;
     public String direction;
     protected int spriteCounter = 0;
@@ -34,7 +35,20 @@ public class Entity {
     }
 
     void setAction() {}
-    void speak(){}
+
+    void speak() {
+        if (dialogIndex >= dialogues.size()) {
+            dialogIndex = 0;
+        }
+        gamePanel.ui.currentDialog = dialogues.get(dialogIndex);
+        dialogIndex++;
+        switch (gamePanel.player.direction) {
+            case "up" -> direction = "down";
+            case "down" -> direction = "up";
+            case "left" -> direction = "right";
+            case "right" -> direction = "left";
+        }
+    }
 
     public void update() {
         setAction();
@@ -42,6 +56,7 @@ public class Entity {
         gamePanel.collisionChecker.checkTile(this);
         gamePanel.collisionChecker.checkObject(this, false);
         gamePanel.collisionChecker.checkPlayer(this);
+
     }
 
     public void draw(Graphics2D g2) {
@@ -69,8 +84,15 @@ public class Entity {
             spriteCounter++;
             if (spriteCounter > 12) {
                 if (spriteNumber == 1) spriteNumber = 2;
-                else if (spriteNumber == 2) spriteNumber = 1;
+                else if (spriteNumber == 2) spriteNumber = 3;
+                else if (spriteNumber == 3) spriteNumber = 2;
                 spriteCounter = 0;
+            }
+        } else if (collisionOn) {
+            standCounter++;
+            if (standCounter == 20) {
+                spriteNumber = 1;
+                standCounter = 0;
             }
         }
     }
@@ -80,18 +102,22 @@ public class Entity {
             case "up" -> {
                 if (spriteNumber == 1) return up1;
                 if (spriteNumber == 2) return up2;
+                if (spriteNumber == 3) return up3;
             }
             case "down" -> {
                 if (spriteNumber == 1) return down1;
                 if (spriteNumber == 2) return down2;
+                if (spriteNumber == 3) return down3;
             }
             case "left" -> {
                 if (spriteNumber == 1) return left1;
                 if (spriteNumber == 2) return left2;
+                if (spriteNumber == 3) return left3;
             }
             case "right" -> {
                 if (spriteNumber == 1) return right1;
                 if (spriteNumber == 2) return right2;
+                if (spriteNumber == 3) return right3;
             }
         }
         return down1;

@@ -49,9 +49,10 @@ public class GamePanel extends JPanel implements Runnable {
     private final int FPS = 60;
 
     //GAME STATE
-    public boolean isPause;
-    public boolean isDialog;
-    public boolean isPlayed = true;
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
+    public final int dialogState = 3;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -65,6 +66,7 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setObject();
         assetSetter.setNPC();
         playMusic(0);
+        gameState = playState;
     }
 
     public void startGameThread() {
@@ -111,7 +113,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if (!isPause) {
+        if (gameState == playState) {
             player.update();
             for (Entity entity : nPCs) {
                 if (entity != null) {
@@ -119,7 +121,7 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
         }
-        if (isPause) {
+        if (gameState == pauseState || gameState == dialogState) {
 
         }
     }

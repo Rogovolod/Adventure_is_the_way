@@ -1,7 +1,6 @@
 package main;
 
 import entity.NPC_Magician;
-import entity.NPC_Pig;
 import object.Rock;
 import object.Wall;
 

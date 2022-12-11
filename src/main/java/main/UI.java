@@ -29,15 +29,15 @@ public class UI {
         g2.setFont(timesNewRomanPlane40);
         g2.setColor(Color.white);
 
-        if (!gamePanel.isPause) {
+        if (gamePanel.gameState == gamePanel.playState) {
             //todo
         }
         // PAUSE
-        if (gamePanel.isPause) {
+        if (gamePanel.gameState == gamePanel.pauseState) {
             drawPauseScreen();
         }
         // Dialog state
-        if (gamePanel.isDialog) {
+        if (gamePanel.gameState == gamePanel.dialogState) {
             drawDialogScreen();
         }
     }
@@ -50,10 +50,15 @@ public class UI {
         int height = gamePanel.titleSize * 4;
         drawSubWindow(x, y, width, height);
 
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32f));
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28f));
         x += gamePanel.titleSize;
         y += gamePanel.titleSize;
-        g2.drawString(currentDialog, x, y);
+
+        for (String line : currentDialog.split("\n")) {
+            g2.drawString(line, x, y);
+            y += 40;
+        }
+
     }
 
     private void drawSubWindow(int x, int y, int width, int height) {

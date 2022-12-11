@@ -35,14 +35,18 @@ public class Player extends Entity {
 
     public void getPlayerImage() {
         try {
-            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/knight/red/knightRedUp1.png")));
+            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/knight/red/knightRedUp3.png")));
             up2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/knight/red/knightRedUp2.png")));
-            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/knight/red/knightRedDown1.png")));
+            up3 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/knight/red/knightRedUp1.png")));
+            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/knight/red/knightRedDown3.png")));
             down2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/knight/red/knightRedDown2.png")));
+            down3 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/knight/red/knightRedDown1.png")));
             left1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/knight/red/knighRedtleft1.png")));
             left2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/knight/red/knightLeftRed2.png")));
+            left3 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/knight/red/knightLeftRed2.png"))); // need to add 3rd pic
             right1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/knight/red/knighRedtRight1.png")));
             right2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/knight/red/knightRightRed2.png")));
+            right3 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/knight/red/knightRightRed2.png"))); // need to add 3rd pic
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -87,7 +91,7 @@ public class Player extends Entity {
 
     private void interactNPC(int index) {
         if (index != 999) {
-            gamePanel.isDialog = true;
+            gamePanel.gameState = gamePanel.dialogState;
             gamePanel.nPCs.get(index).speak();
         }
     }

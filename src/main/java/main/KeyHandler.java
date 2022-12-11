@@ -1,5 +1,8 @@
 package main;
 
+import entity.Entity;
+import entity.NPC_Magician;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -24,7 +27,7 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
-        if (gamePanel.isPlayed && !gamePanel.isPause && !gamePanel.isDialog) {
+        if (gamePanel.gameState == gamePanel.playState) {
             if (code == KeyEvent.VK_W) {
                 upPressed = true;
             }
@@ -38,15 +41,15 @@ public class KeyHandler implements KeyListener {
                 rightPressed = true;
             }
             if (code == KeyEvent.VK_P) {
-                gamePanel.isPause = true;
+                gamePanel.gameState = gamePanel.pauseState;
             }
-        } else if (gamePanel.isPause) {
+        } else if (gamePanel.gameState == gamePanel.pauseState) {
             if (code == KeyEvent.VK_P) {
-                gamePanel.isPause = false;
+                gamePanel.gameState = gamePanel.playState;
             }
-        } else if (gamePanel.isDialog) {
+        } else if (gamePanel.gameState == gamePanel.dialogState) {
             if (code == KeyEvent.VK_ENTER) {
-                gamePanel.isDialog = false;
+                gamePanel.gameState = gamePanel.playState;
             }
         }
 

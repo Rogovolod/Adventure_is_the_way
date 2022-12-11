@@ -3,6 +3,7 @@ package main;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+@Deprecated
 public class UtilityTools {
 
     public BufferedImage scaleImage(BufferedImage original, int width, int height) {
